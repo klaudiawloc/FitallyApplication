@@ -1,0 +1,51 @@
+﻿@model Fitally.Models.WorkoutDay
+
+@{
+    ViewData["Title"] = "Workout details";
+}
+<div class="d-flex flex-column flex-wrap justify-content-center ">
+    <h1 class="text-center text-white-50">@ViewData["Title"]</h1>
+</div>
+
+
+<div class="text-white">
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WorkoutDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WorkoutDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DayName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DayName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Info)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+        <dt class="col-sm-2">
+            Exercises
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.WorkoutExercises.Any())
+            {
+                <ul class="list-group">
+                    @foreach (var ex in Model.WorkoutExercises)
+                    {
+                        <li class="list-group-item list-group-item-dark">@ex.Exercise.Name @ex.Exercise.Sets x @ex.Exercise.Reps @ex.Exercise.Weight kg</li>
+                    }
+                </ul>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-info text-white">Edit</a>
+    <a asp-action="Index" class="text-white btn btn-primary">Back to List</a>
+</div>

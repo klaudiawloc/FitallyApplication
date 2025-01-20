@@ -1,0 +1,68 @@
+﻿@using Fitally.Common
+@model IEnumerable<Fitally.Models.WorkoutDay>
+
+@{
+    ViewData["Title"] = "Workouts";
+}
+
+<div class="d-flex flex-row justify-content-center">
+    <h1 class="text-center text-white-50">@ViewData["Title"]</h1>
+</div>
+
+
+<p>
+    <a asp-action="Create" class="btn btn-info text-white">Create New</a>
+</p>
+<table class="table text-white">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkoutDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Info)
+            </th>
+            <th>
+                Exercises
+            </th>
+            <th class="col-md-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(DateHelper.FormatDate(item.WorkoutDate))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Info)
+                </td>
+                <td>
+                    @if (item.WorkoutExercises.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var ex in item.WorkoutExercises)
+                            {
+                                <li class="list-group-item list-group-item-dark">@ex.Exercise.Name @ex.Exercise.Sets x @ex.Exercise.Reps @ex.Exercise.Weight kg</li>
+                            }
+                        </ul>
+                    }
+                </td>
+                <td>
+                    <div class="d-flex justify-content-center gap-2 flex-lg-nowrap flex-wrap align-content-center">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info text-white">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info text-white">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-info text-white">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,49 @@
+﻿@using Fitally.Common
+@model Fitally.Models.WorkoutDay
+
+@{
+    ViewData["Title"] = "Create workout day";
+}
+
+<div class="d-flex flex-row justify-content-center">
+    <h1 class="text-center text-white-50">@ViewData["Title"]</h1>
+</div>
+
+<div class="row text-white">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (User.IsAdmin())
+            {
+                <div class="form-group">
+                    <label asp-for="UserId" class="control-label"></label>
+                    <select asp-for="UserId" class="form-control" asp-items="ViewBag.AvailableUsers"></select>
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="WorkoutDate" class="control-label"></label>
+                <input asp-for="WorkoutDate" class="form-control" />
+                <span asp-validation-for="WorkoutDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayName" class="control-label"></label>
+                <input asp-for="DayName" class="form-control" />
+                <span asp-validation-for="DayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Info" class="control-label"></label>
+                <input asp-for="Info" class="form-control" />
+                <span asp-validation-for="Info" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn btn-info text-white" />
+                <a asp-action="Index" class="text-white btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

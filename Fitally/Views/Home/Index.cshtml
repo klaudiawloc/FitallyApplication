@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-default text-center">
+                    <h1>Fitally</h1>
+                </div>
+                <div class="card-body text-center">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGhlJTIwZ3ltfGVufDB8fDB8fHww" alt="Warehouse Image" class="img-fluid mb-4 rounded">
+                    <p class="lead text-center">
+                        The Fitally Application is a helper for your daily workouts.
+                    </p>
+                    <p>
+                        It allows users to plan their daily workouts.
+                    </p>
+                    <p>
+                        With a user-friendly interface and advanced features, it enhances productivity and results.
+                    </p>
+                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="card-footer text-center">
+                        <a href="/UserWorkouts" class="btn btn-outline-default">Go to Workouts</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-footer text-center">
+                        <a href="/Identity/Account/Login" class="btn btn-outline-default">Get Started</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
